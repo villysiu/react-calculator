@@ -19,6 +19,7 @@ function manageInput(state = {
             return {
                 question: state.question,
                 result: (eval(state.question)).toString(),
+                userInput: ""
             }
         case 'OP': 
         // console.log(state)
