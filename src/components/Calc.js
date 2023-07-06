@@ -194,28 +194,14 @@ export const main = (x) =>{
         else if(isOperator(last)){
             console.log('output: '+ output)
             if(inputArr.length===4){
-                
-                // [num, +, num, *]   num
-                if(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1])){
-                    // do nothing
-                }
-                else{
-                    // [num, *, num, *]   num
-                    if(isMultiplyOrDivide(last) && isMultiplyOrDivide(inputArr[1])){ 
-                        inputArr.splice(0,3, output)
-                    }
-                    // [num, *, num, +]  num
-                    else if(isPlusOrMinus(last) && isMultiplyOrDivide(inputArr[1])){
-                        inputArr.splice(0,3, output)
-                    }
-                    // [num, +, num, +]  num
-                    else if(isPlusOrMinus(last) && isPlusOrMinus(inputArr[1])){
-                        inputArr.splice(0,3, output)
-                    } 
-                }   
+                // [num, +, num, *]   num do nothing
+                if(!(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1]))){
+                    // [num, *, num, *] or [num, *, num, +] or[num, +, num, +] 
+                    inputArr.splice(0,3, output)
+                }  
             }
             else if(inputArr.length===6){
-
+                //only two scenarios
                 // [num, +, num, *, num, *] num
                 if(isMultiplyOrDivide(inputArr[3]) && isMultiplyOrDivide(inputArr[5])){
                     inputArr.splice(2,3,output)
@@ -224,8 +210,6 @@ export const main = (x) =>{
                 else if(isMultiplyOrDivide(inputArr[3]) && isPlusOrMinus(inputArr[5])){
                     inputArr.splice(0,5,output)
                 }
-                
-
             }
             
             inputArr.push(x)
