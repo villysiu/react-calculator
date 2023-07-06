@@ -33,15 +33,23 @@ code {
   position:relative;
   
 }
+.display-input{
+  text-align: right;
+  color: white;
+  font-size: 2rem;
+  background-color: black;
+  width: var(--cal_w);
+  height: calc(var(--cal_w)/4);
+}
 
-.res {
+/* .res {
   padding-right: 20px;
   position:absolute;
   right:0;
   bottom:0;
   font-size: 2rem;
 
-}
+} */
 .keys {
   display: flex;
   width: 100%;
@@ -67,27 +75,33 @@ code {
   color: black !important;
   font-weight: bolder !important;
   padding: 20px !important;
-  /* width: 100px !important; */
+  width: calc(var(--cal_w)/4) !important;
   height: calc(var(--cal_w)/4) !important;
   border-color: rgba(109, 108, 126, 0.998) !important;
   
 }
 .key_operator {
-  width: calc(var(--cal_w)/4) !important;
-  height: calc(var(--cal_w)/4) !important;
+  /* width: calc(var(--cal_w)/4) !important;
+  height: calc(var(--cal_w)/4) !important; */
   background-color: orange !important;
+}
+.key_operator_clicked{
+  background-color: white !important;
+  color: black !important;
+  /* width: calc(var(--cal_w)/4) !important;
+  height: calc(var(--cal_w)/4) !important; */
 }
 
 .key_num {
   background-color: lightgray !important;
   width: calc(var(--cal_w)/4) !important;
 }
-/* .key_num:hover, .key_operator:hover, .key_0:hover, .key_AC:hover, .key_neg:hover {
-  background-color: rgb(244, 228, 185, 0.8) !important;
-} */
-.key_num:active, .key_operator:active, .key_0:active, .key_AC:active, .key_neg:active {
+
+.key_num:active, .key_operator:active, .key_operator_clicked:active, .key_0:active, .key_AC:active, .key_neg:active {
   background-color: rgb(244, 228, 185, 0.8) !important;
 }
+
+
 
 .key_0 {
   width: calc(var(--cal_w)/2) !important;

@@ -1,5 +1,17 @@
+export const validateInput = (key) =>{
+    const accepted = new Set(['AC','+','-','*','/','=','.', '+/-','Enter','Backspace'])
+    for(let i=0;i<=9;i++)
+        accepted.add(String(i))
+
+    return accepted.has(key)
+}
+
 export const calc=(n1, op, n2)=>{
-    let numStr
+    if(!isNumber(n1) || !isNumber(n2) || !isOperator(op))
+        return 'Error'
+    if(op==='/' && (n2==='0' || n2==='-0'))
+        return 'Error'
+    let numStr = ''
     if(op === '+' || op === '-')
         numStr = plusOrMinus(n1,n2,op) 
     else if(op==='*')
@@ -9,12 +21,14 @@ export const calc=(n1, op, n2)=>{
     return numStr
 }
 export const splitFloatToIntAndDec = (numStr)=>{
-    const regex = /(?<int>\-?\d+)(\.?)(?<dec>\d*)/
+    
+    const regex = /(?<int>-?\d+)(\.?)(?<dec>\d*)/
     const match = numStr.match(regex)
     // console.log(match)
     return [match.groups['int'], match.groups['dec']]
 }
 export const convertFloatToIntWSameDecimalPlaces = (intStr, decStr, decPl)=>{
+    
     return Number(intStr+decStr.padEnd(decPl, '0'))
 }
 export const joinStrings = (intStr, decStr) =>{
@@ -70,3 +84,10 @@ export const isOperator=(op)=>{
 //     let numbers=new Set(['0','1','2','3','4','5','6','7','8','9'])
 //     return numbers.has(digitStr)
 // }
+export const isFloat = (numStr)=>{
+    return numStr.search(/\./) === -1 ? false : true
+    
+}
+export const isNumber = (numStr) =>{
+    return /^-?\d+\.?\d*$/.test(numStr)
+}
