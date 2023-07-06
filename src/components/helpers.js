@@ -85,8 +85,11 @@ export const isOperator=(op)=>{
 //     return numbers.has(digitStr)
 // }
 export const isFloat = (numStr)=>{
-    return numStr.search(/\./) === -1 ? false : true
+    return /^-?\d+\.{1}\d*$/.test(numStr)
     
+}
+export const isInteger = (numStr) =>{
+    return /^-?\d+$/.test(numStr)
 }
 export const isNumber = (numStr) =>{
     return /^-?\d+\.?\d*$/.test(numStr)

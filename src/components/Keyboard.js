@@ -17,7 +17,8 @@ const Keyboard = () => {
     }
     const handleClick = (input) =>{
         const t = main(input)
-        if(t!==null) setValue(t)
+        // if(t!==null) setValue(t)
+        setValue(t)
         resetOpButtons();
         if(['+','-','*','/'].includes(input)){
             if(input === '+')
