@@ -44,9 +44,10 @@ export const main = (x) =>{
         if(isOperator(inputArr[inputArr.length-1])){ 
             inputArr.pop()
         }
-        if(!inputArr[inputArr.length-1]==='=' && inputArr.length>=3){
+        if(inputArr[inputArr.length-1]!=='=' && inputArr.length>=3){
+            //[num, op, num] =
+            //[num, +, num, *, num] =
             while(inputArr.length >=3){
-                console.log(inputArr)
                 let b = inputArr.pop()
                 let op = inputArr.pop()
                 let a = inputArr.pop()
@@ -76,11 +77,11 @@ export const main = (x) =>{
             inputArr.push( last[0]==='-' ? n.slice(1) : '-'+n)
             output = inputArr[inputArr.length-1]
         }
-
     }
     else if(x === '.'){
         //0 '-0' 1-9 +-*/  1.4
         let last = inputArr[inputArr.length-1]
+        //do nothing if already a float
         if(!isFloat(last)){
             if(last === '='){
                 inputArr=['0.']
@@ -96,8 +97,6 @@ export const main = (x) =>{
                 output = inputArr[inputArr.length-1]
             }
         }
-     
-        
     }
     else if(isOperator(x)){  //operator + - * /
         // duplicate op or '='
@@ -139,17 +138,17 @@ export const main = (x) =>{
         }
         else if(last === '-0'){
             inputArr.pop()
-            inputArr.push('-'+x)
-            output = inputArr[inputArr.length-1]
+            
+            output = inputArr.push('-'+x)
         }
         else if(last === '0'){
             inputArr.pop()
-            inputArr.push(x)
-            output = inputArr[inputArr.length-1]
+            // inputArr.push(x)
+            output = inputArr.push(x)
         }
         else if(isOperator(last)){
             if(inputArr.length===4){
-                // [num, +, num, *]   num do nothing
+                // [num, +, num, *] num   do nothing
                 if(!(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1]))){
                     // [num, *, num, *] or [num, *, num, +] or[num, +, num, +] 
                     inputArr.splice(0,3, output)
@@ -169,7 +168,6 @@ export const main = (x) =>{
             
             inputArr.push(x)
             output = x 
-        
         }
         else{ //number (decimal, integer, pos or neg)
             let n = inputArr.pop()
