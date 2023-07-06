@@ -192,7 +192,6 @@ export const main = (x) =>{
             output = inputArr[inputArr.length-1]
         }
         else if(isOperator(last)){
-            console.log('output: '+ output)
             if(inputArr.length===4){
                 // [num, +, num, *]   num do nothing
                 if(!(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1]))){
