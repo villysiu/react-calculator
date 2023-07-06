@@ -66,7 +66,6 @@ export const main = (x) =>{
             const n = inputArr[0]
             inputArr[0]= n[0]==='-' ? n.slice(1) : '-'+n
             output = inputArr[0]
-            
         }
         else if(isOperator(last)){ //+-*/
             inputArr.push('-0')

@@ -92,5 +92,6 @@ export const isInteger = (numStr) =>{
     return /^-?\d+$/.test(numStr)
 }
 export const isNumber = (numStr) =>{
-    return /^-?\d+\.?\d*$/.test(numStr)
+    // return /^-?\d+\.?\d*$/.test(numStr)
+    return isFloat(numStr) || isInteger(numStr)
 }
