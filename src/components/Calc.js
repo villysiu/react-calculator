@@ -1,4 +1,4 @@
-import { calc, isOperator, isMultiplyOrDivide, isPlueOrMinus, isFloat, validateInput, isNumber } from "./helpers"
+import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat, validateInput, isNumber } from "./helpers"
 
 let inputArr = ['0']
 let output = '0'
@@ -129,19 +129,43 @@ export const main = (x) =>{
         if(isOperator(inputArr[inputArr.length-1]) || inputArr[inputArr.length-1]==='='){ //2 operators, remove last one in array
             inputArr.pop()
         }
-        else if(inputArr.length>=3){
-            if(isMultiplyOrDivide(inputArr[inputArr.length-2]) || 
-              (isPlueOrMinus(x) && isPlueOrMinus(inputArr[inputArr.length-2])) ){
-                let b = inputArr.pop()
-                let op = inputArr.pop()
-                let a = inputArr.pop()
-                inputArr.push(calc(a,op,b))
-                if(inputArr[inputArr.length-1]==='Error')
-                    return 'Error'
-            }    
+       
+        if(inputArr.length===5){
+            // [num, +, num, *, num] *
+            if(isMultiplyOrDivide(x)){
+                output = calc(inputArr[2], inputArr[3], inputArr[4]) 
+            }
+            // [num, +, num, *, num] +
+            else{ 
+                let temp = calc(inputArr[2], inputArr[3], inputArr[4])
+                output = calc(inputArr[0], inputArr[1], temp)
+            } 
+        }
+        if(inputArr.length===3){ 
+           
+            
+            if(isMultiplyOrDivide(x)){
+                 // [num, *, num]  *
+                if(isMultiplyOrDivide(inputArr[1])){
+                    output = calc(inputArr[0], inputArr[1], inputArr[2])
+                }
+                 // [num, +, num]  *
+                else{ 
+                    output = inputArr[2]
+                }
+            }
+            else{ 
+                  // [num, *, num]  +
+                if(isMultiplyOrDivide(inputArr[1])){
+                    output = calc(inputArr[0], inputArr[1], inputArr[2])
+                }
+                // [num, +, num]  +
+                else{ 
+                    output = calc(inputArr[0], inputArr[1], inputArr[2])
+                }
+            }
         }
         inputArr.push(x)
-        output = inputArr[inputArr.length-2]
     }
     else{ //if(isDigit(x))
         
@@ -168,8 +192,45 @@ export const main = (x) =>{
             output = inputArr[inputArr.length-1]
         }
         else if(isOperator(last)){
+            console.log('output: '+ output)
+            if(inputArr.length===4){
+                
+                // [num, +, num, *]   num
+                if(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1])){
+                    // do nothing
+                }
+                else{
+                    // [num, *, num, *]   num
+                    if(isMultiplyOrDivide(last) && isMultiplyOrDivide(inputArr[1])){ 
+                        inputArr.splice(0,3, output)
+                    }
+                    // [num, *, num, +]  num
+                    else if(isPlusOrMinus(last) && isMultiplyOrDivide(inputArr[1])){
+                        inputArr.splice(0,3, output)
+                    }
+                    // [num, +, num, +]  num
+                    else if(isPlusOrMinus(last) && isPlusOrMinus(inputArr[1])){
+                        inputArr.splice(0,3, output)
+                    } 
+                }   
+            }
+            else if(inputArr.length===6){
+
+                // [num, +, num, *, num, *] num
+                if(isMultiplyOrDivide(inputArr[3]) && isMultiplyOrDivide(inputArr[5])){
+                    inputArr.splice(2,3,output)
+                }
+                // [num, +, num, *, num, +] num
+                else if(isMultiplyOrDivide(inputArr[3]) && isPlusOrMinus(inputArr[5])){
+                    inputArr.splice(0,5,output)
+                }
+                
+
+            }
+            
             inputArr.push(x)
-            output = inputArr[inputArr.length-1]
+            output = x 
+        
         }
         else{ //number (decimal, integer, pos or neg)
             let n = inputArr.pop()
@@ -178,5 +239,7 @@ export const main = (x) =>{
         }
     }
     console.log(inputArr)
+    if(output==='Error')
+        inputArr=['Error']
     return output
 }

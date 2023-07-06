@@ -74,11 +74,11 @@ const multiply_decimal = (numStr1,numStr2) =>{
 export const isMultiplyOrDivide = (op) =>{
     return op==='*' || op==='/'
 }
-export const isPlueOrMinus = (op) =>{
+export const isPlusOrMinus = (op) =>{
     return op==='+' || op==='-'
 }
 export const isOperator=(op)=>{
-    return isPlueOrMinus(op) || isMultiplyOrDivide(op)
+    return isPlusOrMinus(op) || isMultiplyOrDivide(op)
 }
 // export const isDigit=(diigtStr)=>{
 //     let numbers=new Set(['0','1','2','3','4','5','6','7','8','9'])
