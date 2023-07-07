@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { main } from './Calc';
 const Keyboard = () => {
     const [val, setValue] = useState('0')
+
     const [plusKeyClicked, setPlusKeyClicked] = useState(false)
     const [minusKeyClicked, setMinusKeyClicked] = useState(false)
     const [multiplyKeyClicked, setMultiplyKeyClicked] = useState(false)
@@ -16,9 +17,9 @@ const Keyboard = () => {
         setDivideKeyClicked(false);
     }
     const handleClick = (input) =>{
-        const t = main(input)
-        // if(t!==null) setValue(t)
-        setValue(t)
+        const output = main(input)
+        setValue(output)
+
         resetOpButtons();
         if(['+','-','*','/'].includes(input)){
             if(input === '+')
@@ -27,7 +28,7 @@ const Keyboard = () => {
                 setMinusKeyClicked(true);
             else if(input === '*')
                 setMultiplyKeyClicked(true);
-            else if(input === '/')
+            else// if(input === '/')
                 setDivideKeyClicked(true);
         }
     }
@@ -38,14 +39,14 @@ const Keyboard = () => {
 
     const handleKeyPressed = (e) =>{
         // console.log(e.key, typeof(e.key))
-        const t = main(e.key)
-        if(t!==null) setValue(t)
+        const output = main(e.key)
+        setValue(output)
     }
     return(
         
         <div className='background' style={{textAlign: 'center'}}>
-            <div className='display'>
-                <input type="text" className='display-input' value={val} onKeyDown={handleKeyPressed} />
+            <div>
+                <input type="text" className='display_input' value={val} onKeyDown={handleKeyPressed} />
             </div>
             <div className='keys'>
                 <div className='keys_pad'>
