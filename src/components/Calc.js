@@ -159,7 +159,7 @@ export const main = (x) =>{
             inputArr.push(n+x)
             // output = n+x
         }
-        output = arr[arr.length-1]
+        output = inputArr[inputArr.length-1]
     }
     console.log(inputArr)
 
