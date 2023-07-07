@@ -5,7 +5,7 @@ let output = '0'
 
 export const main = (x) =>{
     if(!validateInput(x))
-        return null
+        return output
 
     console.log('input: '+ x)
     if(x==='AC'){
