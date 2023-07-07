@@ -1,4 +1,4 @@
-import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat, isInteger, validateInput, isNumber } from "./helpers"
+import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat, isInteger, validateInput } from "./helpers"
 
 let inputArr = ['0']
 let output = '0'
@@ -17,27 +17,23 @@ export const main = (x) =>{
         output = 'Error'
 
     else if(x=== 'Backspace'){
-        //=+-*/
-        // console.log(inputArr)
-        
         if(isOperator(inputArr[inputArr.length-1]) || inputArr[inputArr.length-1]==='='){
-            //do nothing, maybe make a sound haha
+            // =+-*/ do nothing, maybe make a sound haha
             console.log('BEEP')
-            output = null
+            
         } else {
-            console.log('a num')
+            // number
             let last=inputArr.pop()
             let n = last.slice(0,last.length-1)
    
             if(n.length===0 || last === '-0'){
+                //last is single digit number or -0, removing -
                 inputArr.push('0')
-
             }else if(n==='-'){
                 inputArr.push('-0')
             }else{
                 inputArr.push(n)
             }
-            // console.log(inputArr)
             output = inputArr[inputArr.length-1]
         }
     }
@@ -137,27 +133,23 @@ export const main = (x) =>{
         let last = inputArr[inputArr.length-1]
         if(last === '='){
             inputArr=[x]
-            // output = x
         }
         else if(last === '-0'){
             inputArr.pop()
             inputArr.push('-'+x)
-            // output = '-'+x
         }
         else if(last === '0'){
             inputArr.pop()
             inputArr.push(x)
-            // output = x
         }
         else if(isOperator(last)){
             operatorHelper(last)
             inputArr.push(x) 
-            // output = x
         }
         else{ //number (decimal, integer, pos or neg)
             let n = inputArr.pop()
             inputArr.push(n+x)
-            // output = n+x
+            
         }
         output = inputArr[inputArr.length-1]
     }

@@ -27,13 +27,9 @@ export const splitFloatToIntAndDec = (numStr)=>{
     // console.log(match)
     return [match.groups['int'], match.groups['dec']]
 }
-export const convertFloatToIntWSameDecimalPlaces = (intStr, decStr, decPl)=>{
-    
-    return Number(intStr+decStr.padEnd(decPl, '0'))
-}
-export const joinStrings = (intStr, decStr) =>{
-    return Number(intStr+decStr)
-}
+export const convertFloatToIntWSameDecimalPlaces = (intStr, decStr, decPl)=> Number(intStr+decStr.padEnd(decPl, '0'))
+
+
 export const plusOrMinus = (numStr1,numStr2, op) =>{
     let [intStr1, decStr1] = splitFloatToIntAndDec(numStr1)
     let [intStr2, decStr2] = splitFloatToIntAndDec(numStr2)
@@ -65,33 +61,23 @@ const multiply_decimal = (numStr1,numStr2) =>{
     let [intStr1, decStr1] = splitFloatToIntAndDec(numStr1)
     let [intStr2, decStr2] = splitFloatToIntAndDec(numStr2)
     let dec_pl = decStr1.length+decStr2.length
-    let num1 = joinStrings(intStr1, decStr1)
-    let num2 = joinStrings(intStr2, decStr2)
+    let num1 = Number(intStr1 + decStr1)
+    let num2 = Number(intStr2 + decStr2)
     return String(num1*num2/Math.pow(10, dec_pl))
 
 }
 // console.log(MultiplyOrDivide('2.3', '0.3', '/'))
-export const isMultiplyOrDivide = (op) =>{
-    return op==='*' || op==='/'
-}
-export const isPlusOrMinus = (op) =>{
-    return op==='+' || op==='-'
-}
-export const isOperator=(op)=>{
-    return isPlusOrMinus(op) || isMultiplyOrDivide(op)
-}
-// export const isDigit=(diigtStr)=>{
-//     let numbers=new Set(['0','1','2','3','4','5','6','7','8','9'])
-//     return numbers.has(digitStr)
-// }
-export const isFloat = (numStr)=>{
-    return /^-?\d+\.{1}\d*$/.test(numStr)
-    
-}
-export const isInteger = (numStr) =>{
-    return /^-?\d+$/.test(numStr)
-}
-export const isNumber = (numStr) =>{
-    // return /^-?\d+\.?\d*$/.test(numStr)
-    return isFloat(numStr) || isInteger(numStr)
-}
+
+export const isMultiplyOrDivide = (op) => op==='*' || op==='/'
+
+export const isPlusOrMinus = (op) => op==='+' || op==='-'
+
+export const isOperator=(op)=> isPlusOrMinus(op) || isMultiplyOrDivide(op)
+
+
+export const isFloat = (numStr)=> /^-?\d+\.{1}\d*$/.test(numStr)
+
+export const isInteger = (numStr) =>  /^-?\d+$/.test(numStr)
+
+export const isNumber = (numStr) => isFloat(numStr) || isInteger(numStr)
+
