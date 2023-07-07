@@ -2,6 +2,7 @@ import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat, isInteger
 
 let inputArr = ['0']
 let output = '0'
+
 export const main = (x) =>{
     if(!validateInput(x))
         return null
@@ -69,6 +70,7 @@ export const main = (x) =>{
             output = inputArr[0]
         }
         else if(isOperator(last)){ //+-*/
+            operatorHelper(last)
             inputArr.push('-0')
             output = '-0'
         }
@@ -88,13 +90,14 @@ export const main = (x) =>{
                 output = '0.'
             }
             else if(isOperator(last)){ //+-*/
+                operatorHelper(last)
                 inputArr.push('0.')
-                output = '0.'
+                output = '0.' 
             }
             else if(isInteger(last)) { //integer 
                 let n = inputArr.pop()
                 inputArr.push(n+'.')
-                output = inputArr[inputArr.length-1]
+                output = n+'.'
             }
         }
     }
@@ -134,46 +137,29 @@ export const main = (x) =>{
         let last = inputArr[inputArr.length-1]
         if(last === '='){
             inputArr=[x]
-            output = x
+            // output = x
         }
         else if(last === '-0'){
             inputArr.pop()
-            
-            output = inputArr.push('-'+x)
+            inputArr.push('-'+x)
+            // output = '-'+x
         }
         else if(last === '0'){
             inputArr.pop()
-            // inputArr.push(x)
-            output = inputArr.push(x)
+            inputArr.push(x)
+            // output = x
         }
         else if(isOperator(last)){
-            if(inputArr.length===4){
-                // [num, +, num, *] num   do nothing
-                if(!(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1]))){
-                    // [num, *, num, *] or [num, *, num, +] or[num, +, num, +] 
-                    inputArr.splice(0,3, output)
-                }  
-            }
-            else if(inputArr.length===6){
-                //only two scenarios
-                // [num, +, num, *, num, *] num
-                if(isMultiplyOrDivide(inputArr[3]) && isMultiplyOrDivide(inputArr[5])){
-                    inputArr.splice(2,3,output)
-                }
-                // [num, +, num, *, num, +] num
-                else if(isMultiplyOrDivide(inputArr[3]) && isPlusOrMinus(inputArr[5])){
-                    inputArr.splice(0,5,output)
-                }
-            }
-            
-            inputArr.push(x)
-            output = x 
+            operatorHelper(last)
+            inputArr.push(x) 
+            // output = x
         }
         else{ //number (decimal, integer, pos or neg)
             let n = inputArr.pop()
             inputArr.push(n+x)
-            output = inputArr[inputArr.length-1]
+            // output = n+x
         }
+        output = arr[arr.length-1]
     }
     console.log(inputArr)
 
@@ -181,3 +167,24 @@ export const main = (x) =>{
         inputArr=['Error']
     return output
 }
+
+const operatorHelper=(last)=>{
+    if(inputArr.length===4){
+        // [num, +, num, *] num   do nothing
+        if(!(isMultiplyOrDivide(last) && isPlusOrMinus(inputArr[1]))){
+            // [num, *, num, *] or [num, *, num, +] or[num, +, num, +] 
+            inputArr.splice(0,3, output)
+        }  
+    }
+    else if(inputArr.length===6){
+        //only two scenarios
+        // [num, +, num, *, num, *] num
+        if(isMultiplyOrDivide(inputArr[3]) && isMultiplyOrDivide(inputArr[5])){
+            inputArr.splice(2,3,output)
+        }
+        // [num, +, num, *, num, +] num
+        else if(isMultiplyOrDivide(inputArr[3]) && isPlusOrMinus(inputArr[5])){
+            inputArr.splice(0,5,output)
+        }
+    }
+} 
