@@ -31,8 +31,6 @@ export const main = (x) =>{
             break;
         case x==='+':
         case x==='-': 
-        case x==='x':
-        case x==='÷':
         case x==='*':
         case x==='/':    
             [inputArr, output] = operatorHelper(x,inputArr)

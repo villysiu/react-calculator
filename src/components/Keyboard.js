@@ -3,22 +3,24 @@ import { PlusSlashMinus } from 'react-bootstrap-icons'
 import { useState } from 'react';
 import { main } from './calc';
 const Keyboard = () => {
-    const [val, setValue] = useState('0')
+    const [val, setVal] = useState('0')
     const [clickedBtn, setClickedBtn] = useState(null)
     
 
 
     const handleClick = (input) =>{
         const output = main(input)
-        setValue(output)
+        setVal(output)
         setClickedBtn(input)
     }
     
     const handleKeyPressed = (e) =>{
-        // console.log(e.key, typeof(e.key))
-        console.log("what is keyPressed")
+        console.log(e.key, typeof(e.key))
+        // console.log("what is keyPressed")
+        // let bb = `btn-${e.key}`
+        // bb.addClass('active')
         const output = main(e.key)
-        setValue(output)
+        setVal(output)
         setClickedBtn(e.key)
     }
     const handleChange = (e) => {
@@ -29,7 +31,9 @@ const Keyboard = () => {
         
         <div className='background' style={{textAlign: 'center'}}>
             <div>
-                <input onfocusout="this.focus()" type="text" className='display_input' value={val} 
+                <input 
+                // onFocus={this.focus()}
+                 type="text" className='display_input' value={val} 
                 onChange={handleChange} 
                 onKeyDown={handleKeyPressed}
                  />
@@ -43,7 +47,7 @@ const Keyboard = () => {
                     <div className='number_pad'>
                         {
                             ['7','8','9','4','5','6','1','2','3'].map(num=>(
-                                <Button key={num} value={num} className="key key_num"
+                                <Button key={num} id={"btn-"+num} value={num} className="key key_num"
                                     onClick={e=>handleClick(e.target.value)}>
                                         {num}
                                 </Button>
@@ -56,12 +60,13 @@ const Keyboard = () => {
                 </div>
                 <div className='operators_pad'>
                     {
-                        ['÷','x','+','-'].map(op=>(
+                        ['/','*','+','-'].map(op=>(
                             <Button  
-                                value={op} key={op}
+                                value={op} 
+                                key={op}
                                 className={clickedBtn===op ? 'key key_operator_clicked' : 'key key_operator'} 
                                 onClick={e=>handleClick(e.target.value)}>
-                                    {op}
+                                    {op==='*' ? 'x' : op==='/'? '÷' : op}
                             </Button>
                         ))
                     }

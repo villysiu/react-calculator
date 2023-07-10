@@ -85,8 +85,7 @@ export const dotHelper = (inputArr, mem) =>{
 }
 export const operatorHelper = (x, inputArr) =>{
     // duplicate op or '='
-    if(x==='x') x='*'
-    if(x==='÷') x='/'
+
     if(isOperator(inputArr[inputArr.length-1]) || inputArr[inputArr.length-1]==='='){ //2 operators, remove last one in array
         inputArr.pop()
     }
