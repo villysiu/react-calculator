@@ -23,7 +23,7 @@ const Keyboard = () => {
         
         <div className='background' style={{textAlign: 'center'}}>
             <div>
-                <input type="text" className='display_input' value={val} onKeyDown={handleKeyPressed} />
+                <input type="text" className='display_input' value={val} onChange={handleKeyPressed} onKeyDown={handleKeyPressed} />
             </div>
             <div className='keys'>
                 <div className='keys_pad'>
@@ -33,10 +33,10 @@ const Keyboard = () => {
                     </div>
                     <div className='number_pad'>
                         {
-                            ['7','8','9','4','5','6','1','2','3'].map(n=>(
-                                <Button value={n} className="key key_num"
+                            ['7','8','9','4','5','6','1','2','3'].map(num=>(
+                                <Button key={num} value={num} className="key key_num"
                                     onClick={e=>handleClick(e.target.value)}>
-                                        {n}
+                                        {num}
                                 </Button>
                             ))
                         }
@@ -47,17 +47,15 @@ const Keyboard = () => {
                 </div>
                 <div className='operators_pad'>
                     {
-                        ['/','*','+','-'].map(op=>(
+                        ['÷','x','+','-'].map(op=>(
                             <Button  
-                                value={op} 
-                                className={clickedBtn === op ? 'key key_operator_clicked' : 'key key_operator'} 
+                                value={op} key={op}
+                                className={clickedBtn===op ? 'key key_operator_clicked' : 'key key_operator'} 
                                 onClick={e=>handleClick(e.target.value)}>
                                     {op}
                             </Button>
-                    
                         ))
                     }
-                    
                     <Button  className="key key_operator" value='=' onClick={e=>handleClick(e.target.value)}>=</Button>
                 </div>
             </div>

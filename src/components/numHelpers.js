@@ -1,5 +1,5 @@
 export const validateInput = (key) =>{
-    const accepted = new Set(['AC','+','-','*','/','=','.', '+/-','Enter','Backspace'])
+    const accepted = new Set(['AC','+','-','x','÷','=','.', '+/-','Enter','Backspace'])
     for(let i=0;i<=9;i++)
         accepted.add(String(i))
 

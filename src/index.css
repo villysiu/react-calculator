@@ -20,11 +20,16 @@ code {
     --cal_w: 100vw;
   }
 }
+.App {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .background {
   width: var(--cal_w);
   height: calc(var(--cal_w)*3/2);
   background-color: black;
-  
 }
 
 .display_input{
@@ -61,7 +66,7 @@ code {
 .key {
   color: black !important;
   font-weight: bolder !important;
-  padding: 20px !important;
+  /* padding: 0px !important; */
   width: calc(var(--cal_w)/4) !important;
   height: calc(var(--cal_w)/4) !important;
   border-color: rgba(109, 108, 126, 0.998) !important;
