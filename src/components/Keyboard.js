@@ -1,12 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import { PlusSlashMinus } from 'react-bootstrap-icons'
 import { useState } from 'react';
-import { main } from './Calc';
+import { main } from './calc';
 const Keyboard = () => {
     const [val, setValue] = useState('0')
     const [clickedBtn, setClickedBtn] = useState(null)
     
-    
+
+
     const handleClick = (input) =>{
         const output = main(input)
         setValue(output)
@@ -15,15 +16,23 @@ const Keyboard = () => {
     
     const handleKeyPressed = (e) =>{
         // console.log(e.key, typeof(e.key))
+        console.log("what is keyPressed")
         const output = main(e.key)
         setValue(output)
         setClickedBtn(e.key)
     }
+    const handleChange = (e) => {
+        // console.log("what is changing????")
+    }
+    
     return(
         
         <div className='background' style={{textAlign: 'center'}}>
             <div>
-                <input type="text" className='display_input' value={val} onChange={handleKeyPressed} onKeyDown={handleKeyPressed} />
+                <input onfocusout="this.focus()" type="text" className='display_input' value={val} 
+                onChange={handleChange} 
+                onKeyDown={handleKeyPressed}
+                 />
             </div>
             <div className='keys'>
                 <div className='keys_pad'>
@@ -59,11 +68,12 @@ const Keyboard = () => {
                     <Button  className="key key_operator" value='=' onClick={e=>handleClick(e.target.value)}>=</Button>
                 </div>
             </div>
-                
+            
         </div>
             
         
-
+            
+            
  
     )
 }
