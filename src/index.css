@@ -72,35 +72,32 @@ code {
   border-color: rgba(109, 108, 126, 0.998) !important;
   
 }
-.key_operator {
+.key_orange {
   background-color: orange !important;
 }
-.key_operator_clicked{
+.key_white{
   background-color: white !important;
-  color: black !important;
+  /* color: black !important; */
 }
 
-.key_num {
+.key_ltgray {
   background-color: lightgray !important;
 }
 
-.key_num:active, .key_operator:active, .key_operator_clicked:active, .key_0:active, .key_AC:active, .key_neg:active {
-  background-color: rgb(244, 228, 185, 0.8) !important;
-}
-
-
-
-.key_0 {
+.key_double {
   width: calc(var(--cal_w)/2) !important;
-  background-color: lightgray !important;
+  /* background-color: lightgray !important; */
 }
-.key_neg {
+.key_dkgray {
   background-color: gray !important;
   /* width: calc(var(--cal_w)/4) !important; */
 }
-.key_AC{
+/* .key_AC{
   width: calc(var(--cal_w)/2) !important;
   background-color: gray !important;
+} */
+/* .key_orange:active, .key_ltgray:active, .key_dkgray:active,  */
+.key_num_active {
+  background-color: rgb(244, 228, 185, 0.8) !important;
 }
-
 

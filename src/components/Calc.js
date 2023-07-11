@@ -1,5 +1,5 @@
-import { validateInput } from "./numHelpers"
-import { backSpaceHelper, equalHelper,negHelper, dotHelper, operatorHelper, digitHelper } from "./calcHelpers"
+import { validateInput } from "./inputHelpers"
+import { backSpaceHelper, equalHelper,negHelper, dotHelper, operatorHelper, digitHelper } from "./inputHelpers"
 let inputArr = ['0']
 let output = null
 
