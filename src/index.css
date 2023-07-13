@@ -97,7 +97,7 @@ code {
   background-color: gray !important;
 } */
 /* .key_orange:active, .key_ltgray:active, .key_dkgray:active,  */
-.key_num_active {
+.key_num_active, .key_ltgray:active, .key_dkgray:active, .key_orange:active {
   background-color: rgb(244, 228, 185, 0.8) !important;
 }
 

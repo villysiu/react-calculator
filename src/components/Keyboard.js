@@ -4,27 +4,26 @@ import { PlusSlashMinus } from 'react-bootstrap-icons'
 import { useState } from 'react';
 import { main } from './calc';
 import { validateInput } from './inputHelpers';
+import { isOperator } from './calcHelpers';
 const Keyboard = () => {
     const [val, setVal] = useState('0')
-    const [clickedBtn, setClickedBtn] = useState(null)
+    const [clickedOp, setClickedOp] = useState(null)
     
-    const [selected, setSelected] = useState(null)
+    const [keyPressed, setKeyPressed] = useState(null)
 
     const handleClick = (input) =>{
         const output = main(input)
         setVal(output)
-        setSelected(input)
-        setClickedBtn(input)
+        if(isOperator(input))
+            setClickedOp(input)
     }
     
     
     const handleKeyPressed = (e) =>{
-        console.log(e)
-        console.log(e.key, e.code)
+        console.log(e.key)
         
         if(validateInput(e.key)){
-            
-            
+            setKeyPressed(e.key)
             document.getElementById(`btn-${e.key}`).click();
         }
         
@@ -34,16 +33,16 @@ const Keyboard = () => {
     }
     useEffect(() => {
         const timer = setTimeout(() => {
-          setSelected(null);
-        }, 200);
+          setKeyPressed(null);
+        }, 300);
         return () => clearTimeout(timer);
-      }, [selected])
+      }, [keyPressed])
     return(
         
         <div className='background' style={{textAlign: 'center'}}>
             <div>
                 <input 
-                // onFocus={this.focus()}
+                autoFocus
                 type="text" className='display_input' value={val} 
                 onChange={handleChange} 
                 onKeyDown={handleKeyPressed}
@@ -59,7 +58,7 @@ const Keyboard = () => {
                         {
                             ['7','8','9','4','5','6','1','2','3'].map(num=>(
                                 <Button key={num} id={"btn-"+num} value={num} 
-                                    className={selected===num? "key key_num_active":"key key_ltgray"}
+                                    className={keyPressed===num? "key key_num_active":"key key_ltgray"}
                                     onClick={e=>handleClick(e.target.value)}>
                                         {num}
                                 </Button>
@@ -67,12 +66,12 @@ const Keyboard = () => {
                         }
                         
                         <Button id="btn-0" 
-                            className={selected==="0" ? "key key_double key_num_active":"key key_ltgray key_double"}
+                            className={keyPressed==="0" ? "key key_double key_num_active":"key key_ltgray key_double"}
                             onClick={e=>handleClick('0')}>
                                 0
                         </Button>
                         <Button id="btn-." 
-                            className={selected==="." ? "key key_num_active":"key key_ltgray"}
+                            className={keyPressed==="." ? "key key_num_active":"key key_ltgray"}
                             onClick={e=>handleClick('.')}>
                                 .
                         </Button> 
@@ -85,7 +84,7 @@ const Keyboard = () => {
                                 // value={op} 
                                 key={op}
                                 id={"btn-"+op} 
-                                className={clickedBtn===op ? 'key key_white' : 'key key_orange'} 
+                                className={clickedOp===op ? 'key key_white' : 'key key_orange'} 
                                 onClick={e=>handleClick(op)}>
                                     {op==='*' ? 'x' : op==='/'? '÷' : op}
                             </Button>
@@ -93,7 +92,7 @@ const Keyboard = () => {
                     }
                     <Button id="btn-Enter" 
                     // className="key key_operator" 
-                    className={selected==="Enter" ? "key key_num_active":"key key_orange"}
+                    className={keyPressed==="Enter" ? "key key_num_active":"key key_orange"}
                     onClick={e=>handleClick('Enter')}>=</Button>
                 </div>
             </div>
