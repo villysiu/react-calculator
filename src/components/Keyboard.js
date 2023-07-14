@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { main } from './calc';
 import { validateInput } from './inputHelpers';
 import { isOperator } from './calcHelpers';
+import { ButtonLtGray } from './ButtonLtGray';
 const Keyboard = () => {
     const [val, setVal] = useState('0')
     const [clickedOp, setClickedOp] = useState(null)
@@ -19,15 +20,13 @@ const Keyboard = () => {
     
     const handleKeyUp = (e)=>{
         if(e.key==='Alt'){
-            console.log('key is up')
             setAltPressed(e.type === 'keydown')
-        }/* insert conditional here */
+        }
     }
     const handleKeyPressed = (e) =>{
-        
+        console.log(e)
         
         if(validateInput(e.key) || (e.keyCode === 189 && altPressed)){
-            console.log("not here")
             if(e.key==='Escape'){
                 setKeyPressed('AC')
                 setAltPressed(false)
@@ -38,11 +37,16 @@ const Keyboard = () => {
             }
             else if(e.keyCode === 189 && altPressed){
                 setKeyPressed('neg')
-                setAltPressed(false)
+                // setAltPressed(false)
                 document.getElementById(`btn-neg`).click();
-            }else {
-                setKeyPressed(e.key)
-                setAltPressed(false)
+            }
+            else if(e.keyCode === 190){ //dot
+                setKeyPressed('btn-dot')
+                document.getElementById(`btn-dot`).click();
+            }
+            else {
+                setKeyPressed(`btn-${e.key}`)
+                // setAltPressed(false)
                 document.getElementById(`btn-${e.key}`).click();
    
             }
@@ -74,16 +78,16 @@ const Keyboard = () => {
                 <div className='keys_pad'>
                     <div className='misc'>
                         <Button id="btn-AC" className="key key_double key_dkgray" onClick={e=>handleClick('AC')}>AC</Button>
-                        <Button id="btn-neg" className={keyPressed==='neg' ? "key key_num_active" : "key key_dkgray"} onClick={e=>handleClick('+/-')}><PlusSlashMinus /></Button>
+                        <Button id="btn-neg" 
+                            className={keyPressed==='neg' ? "key key_num_active" : "key key_dkgray"} 
+                            onClick={e=>handleClick('+/-')}>
+                                <PlusSlashMinus />
+                        </Button>
                     </div>
                     <div className='number_pad'>
                         {
                             ['7','8','9','4','5','6','1','2','3'].map(num=>(
-                                <Button key={num} id={"btn-"+num} value={num} 
-                                    className={keyPressed===num? "key key_num_active":"key key_ltgray"}
-                                    onClick={e=>handleClick(e.target.value)}>
-                                        {num}
-                                </Button>
+                                <ButtonLtGray key={num} btnName={"btn-"+num} val={num} keyPressed={keyPressed} handleClick={handleClick} />
                             ))
                         }
                         
@@ -92,11 +96,9 @@ const Keyboard = () => {
                             onClick={e=>handleClick('0')}>
                                 0
                         </Button>
-                        <Button id="btn-." 
-                            className={keyPressed==="." ? "key key_num_active":"key key_ltgray"}
-                            onClick={e=>handleClick('.')}>
-                                .
-                        </Button> 
+                        <ButtonLtGray key="dot" btnName="btn-dot" val="." keyPressed={keyPressed} handleClick={handleClick} />
+                       
+
                     </div>
                 </div>
                 <div className='operators_pad'>

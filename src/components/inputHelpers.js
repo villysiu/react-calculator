@@ -1,13 +1,14 @@
 import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat, isInteger } from "./calcHelpers"
 
 export const validateInput = (key) =>{
-    const accepted = new Set(['AC','+','-','*','/','=','.', '+/-','Enter','Backspace'])
+    const accepted = new Set(['AC','+','-','*','/','=','.', '+/-','Enter','Backspace', 'Escape', 'Alt'])
     for(let i=0;i<=9;i++)
         accepted.add(String(i))
-
+    
     return accepted.has(key)
 }
 export const backSpaceHelper = (inputArr, mem) =>{
+    console.log(inputArr, mem)
     if(isOperator(inputArr[inputArr.length-1]) || inputArr[inputArr.length-1]==='='){
         // =+-*/ do nothing, maybe make a sound haha
         console.log('BEEP')
@@ -153,8 +154,7 @@ export const digitHelper = (x, inputArr, mem) =>{
          return[[...inputArr, n+x], n+x]
          
     //  }
-    //  output = inputArr[inputArr.length-1]
-    //  return [inputArr, output]
+
 }
 
 const updateArr=(inputArr, output)=>{
