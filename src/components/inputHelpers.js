@@ -1,7 +1,7 @@
 import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat, isInteger } from "./calcHelpers"
 
 export const validateInput = (key) =>{
-    const accepted = new Set(['AC','+','-','*','/','=','.', '+/-','Enter','Backspace', 'Escape', 'Alt'])
+    const accepted = new Set(['AC','+','-','*','/','=','.','Del', 'neg','Enter','Backspace', 'Escape', 'Alt'])
     for(let i=0;i<=9;i++)
         accepted.add(String(i))
     
@@ -125,7 +125,9 @@ export const operatorHelper = (x, inputArr) =>{
     return [[...inputArr, x], inputArr[0]]
     
 }
+export const percentHelper = () =>{
 
+}
 export const digitHelper = (x, inputArr, mem) =>{
      // inputArr[inputArr.length-1] can be +-, */, 0, -0, number(integer or decimal,pos or neg), 
      let last = inputArr[inputArr.length-1]

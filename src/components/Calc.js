@@ -17,13 +17,14 @@ export const main = (x) =>{
         case inputArr[0] === 'Error':
             return 'Error'
         case x==='Backspace':
+        case x==='Del':
             [inputArr, output] = backSpaceHelper(inputArr, output)
             break;
         case x==='=':
         case x==='Enter':
             [inputArr, output] = equalHelper(inputArr)
             break;
-        case x==='+/-':
+        case x==='neg':
             [inputArr, output] = negHelper(inputArr, output)
             break;
         case x==='.':
@@ -35,7 +36,9 @@ export const main = (x) =>{
         case x==='/':    
             [inputArr, output] = operatorHelper(x,inputArr)
             break;
-
+        // case x==='%':
+        //     [inputArr, output] = percentHelper(x,inputArr)
+        //     break;
         default: //digit 0 to 9
             [inputArr, output] = digitHelper(x,inputArr, output)
             break;
