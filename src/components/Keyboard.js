@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { main } from './calc';
 import { validateInput } from './inputHelpers';
@@ -22,41 +21,35 @@ const Keyboard = () => {
     
     const handleKeyUp = (e)=>{
         if(e.key==='Alt'){
-            setAltPressed(e.type === 'keydown')
+            setAltPressed(false)
         }
     }
     const handleKeyPressed = (e) =>{
-        console.log(e)
-        
+        // console.log(e)
+        let btn=null
         if(validateInput(e.key) || (e.keyCode === 189 && altPressed)){
-            if(e.key==='Escape'){
-                setKeyPressed('AC')
-                setAltPressed(false)
-                document.getElementById(`btn-AC`).click();
-            }
-            else if(e.key === 'Alt'){
+            if(e.key === 'Alt'){
                 setAltPressed(e.type === 'keydown')
             }
-            else if(e.keyCode === 189 && altPressed){
-                setKeyPressed('btn-neg')
-                // setAltPressed(false)
-                document.getElementById(`btn-neg`).click();
-            }
-
-            else if(e.key === 'Enter'){
-                setKeyPressed('btn-=')
-                document.getElementById(`btn-=`).click();
-            }
-            else if(e.key === 'Backspace'){
-                setKeyPressed('btn-Del')
-                document.getElementById(`btn-Del`).click();
-            }
-            else {
-                setKeyPressed(`btn-${e.key}`)
-                // setAltPressed(false)
-                document.getElementById(`btn-${e.key}`).click();
-   
-            }
+            else{
+                if(e.key==='Escape'){
+                    btn = 'btn-AC'
+                }
+                else if(e.keyCode === 189 && altPressed){
+                    btn = 'btn-neg'
+                }
+                else if(e.key === 'Enter'){
+                    btn = 'btn-='
+                }
+                else if(e.key === 'Backspace'){
+                    btn = 'btn-Del'
+                }
+                else {
+                    btn = `btn-${e.key}`
+                }
+                setKeyPressed(btn)
+                document.getElementById(btn).click();
+            } 
         }
         
     }
@@ -69,6 +62,7 @@ const Keyboard = () => {
         }, 300);
         return () => clearTimeout(timer);
       }, [keyPressed])
+
     return(
         
         <div className='background' style={{textAlign: 'center'}}>
@@ -92,19 +86,11 @@ const Keyboard = () => {
                     </div>
                     <div className='number_pad'>
                         {
-                            ['7','8','9','4','5','6','1','2','3'].map(num=>(
+                            ['7','8','9','4','5','6','1','2','3', '0','.'].map(num=>(
                                 <ButtonLtGray key={num} btnName={"btn-"+num} val={num} keyPressed={keyPressed} handleClick={handleClick} />
                             ))
                         }
                         
-                        <Button id="btn-0" 
-                            className={keyPressed==="0" ? "key key_double key_num_active":"key key_ltgray key_double"}
-                            onClick={e=>handleClick('0')}>
-                                0
-                        </Button>
-                        <ButtonLtGray key="dot" btnName="btn-." val="." keyPressed={keyPressed} handleClick={handleClick} />
-                       
-
                     </div>
                 </div>
                 <div className='operators_pad'>
@@ -113,18 +99,10 @@ const Keyboard = () => {
                             <ButtonOrange key={op} btnName={"btn-"+op} op={op} clickedOp={clickedOp} handleClick={handleClick} />
                         ))
                     }
-                    {/* <Button id="btn-Enter" 
-                    className={keyPressed==="Enter" ? "key key_num_active":"key key_orange"}
-                    onClick={e=>handleClick('Enter')}>=</Button> */}
                 </div>
             </div>
             
         </div>
-            
-        
-            
-            
- 
     )
 }
 export default Keyboard
