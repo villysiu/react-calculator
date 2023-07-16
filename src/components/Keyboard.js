@@ -1,22 +1,27 @@
 import { useEffect } from 'react';
-import { useState } from 'react';
-import { main } from './calc';
+import { useState, useReducer } from 'react';
+// import { main } from './calc';
 import { validateInput } from './inputHelpers';
 import { isOperator } from './calcHelpers';
 import { ButtonLtGray } from './ButtonLtGray';
 import { ButtonOrange } from './ButtonOrange';
 import { ButtonDkGray } from './ButtonDkGray';
+import {reducer} from './reducer'
 const Keyboard = () => {
-    const [output, setOutput] = useState('0')
+    // const [output, setOutput] = useState('0')
+    const initialState = {inputArr: ['0'], output: '0'}
+    const [state, dispatch] = useReducer(reducer, initialState);
+
     const [clickedOp, setClickedOp] = useState(null)
-    
     const [keyPressed, setKeyPressed] = useState(null)
     const [altPressed, setAltPressed] = useState(false)
 
     const handleClick = (input) =>{
-        const res = main(input)
-        setOutput(res)
+        // const res = main(input)
+        // setOutput(res)
+        dispatch({type: input})
         setClickedOp(isOperator(input) ? input : null)
+        console.log(state.inputArr)
     }
     
     const handleKeyUp = (e)=>{
@@ -69,7 +74,7 @@ const Keyboard = () => {
             <div>
                 <input 
                 autoFocus
-                type="text" className='display_input' value={output} 
+                type="text" className='display_input' value={state.output} 
                 onChange={handleChange} 
                 onKeyDown={handleKeyPressed}
                 onKeyUp={handleKeyUp}
