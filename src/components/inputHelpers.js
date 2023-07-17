@@ -1,7 +1,7 @@
 import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat } from "./calcHelpers"
 
 export const validateInput = (key) =>{
-    const accepted = new Set(['AC','+','-','*','/','=','.','Del', 'neg','Enter','Backspace', 'Escape', 'Alt'])
+    const accepted = new Set(['AC','+','-','*','/','=','.','Del', 'neg','Enter','Backspace', 'Escape'])
     for(let i=0;i<=9;i++)
         accepted.add(String(i))
     

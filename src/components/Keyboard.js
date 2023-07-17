@@ -13,48 +13,45 @@ const Keyboard = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const [clickedOp, setClickedOp] = useState(null)
-    const [keyPressed, setKeyPressed] = useState(null)
-    const [altPressed, setAltPressed] = useState(false)
+    const [keyActive, setKeyActive] = useState(null)
 
     const handleClick = (input) =>{
-        // const res = main(input)
-        // setOutput(res)
+
         dispatch({type: input})
         setClickedOp(isOperator(input) ? input : null)
         console.log(state.inputArr)
     }
     
-    const handleKeyUp = (e)=>{
-        if(e.key==='Alt'){
-            setAltPressed(false)
-        }
-    }
     const handleKeyPressed = (e) =>{
-        // console.log(e)
-        let btn=null
-        if(validateInput(e.key) || (e.keyCode === 189 && altPressed)){
-            if(e.key === 'Alt'){
-                setAltPressed(e.type === 'keydown')
+        console.log(e)
+        if(validateInput(e.key) || (e.keyCode === 189 && e.altKey)){
+            // console.log(e.key)
+            switch(true){
+                case e.key === 'Escape':
+                    setKeyActive('btn-AC')
+                    document.getElementById('btn-AC').click()
+                    break;
+                
+                case e.key==="–" && e.altKey === true:
+                    setKeyActive('btn-neg')
+                    document.getElementById('btn-neg').click()
+                    break;
+                case e.key === 'Enter':
+                    setKeyActive('btn-=')
+                    document.getElementById('btn-=').click()
+                    break;
+
+                case e.key === 'Backspace':
+                    setKeyActive('btn-Del')
+                    document.getElementById('btn-Del').click()
+                    break;
+
+                default:
+                    console.log('in default')
+                    setKeyActive(`btn-${e.key}`)
+                    document.getElementById(`btn-${e.key}`).click()
+                    break;
             }
-            else{
-                if(e.key==='Escape'){
-                    btn = 'btn-AC'
-                }
-                else if(e.keyCode === 189 && altPressed){
-                    btn = 'btn-neg'
-                }
-                else if(e.key === 'Enter'){
-                    btn = 'btn-='
-                }
-                else if(e.key === 'Backspace'){
-                    btn = 'btn-Del'
-                }
-                else {
-                    btn = `btn-${e.key}`
-                }
-                setKeyPressed(btn)
-                document.getElementById(btn).click();
-            } 
         }
         
     }
@@ -63,10 +60,10 @@ const Keyboard = () => {
     }
     useEffect(() => {
         const timer = setTimeout(() => {
-          setKeyPressed(null);
+          setKeyActive(null);
         }, 300);
         return () => clearTimeout(timer);
-      }, [keyPressed])
+      }, [keyActive])
 
     return(
         
@@ -77,7 +74,7 @@ const Keyboard = () => {
                 type="text" className='display_input' value={state.output} 
                 onChange={handleChange} 
                 onKeyDown={handleKeyPressed}
-                onKeyUp={handleKeyUp}
+                // onKeyUp={handleKeyUp}
                  />
             </div>
             <div className='keys'>
@@ -85,14 +82,14 @@ const Keyboard = () => {
                     <div className='misc'>
                         {
                             ['AC','neg', 'Del'].map(val =>(
-                                <ButtonDkGray key={val} btnName={"btn-"+val} val={val} keyPressed={keyPressed} handleClick={handleClick} />
+                                <ButtonDkGray key={val} btnName={"btn-"+val} val={val} keyActive={keyActive} handleClick={handleClick} />
                             ))
                         }
                     </div>
                     <div className='number_pad'>
                         {
                             ['7','8','9','4','5','6','1','2','3', '0','.'].map(num=>(
-                                <ButtonLtGray key={num} btnName={"btn-"+num} val={num} keyPressed={keyPressed} handleClick={handleClick} />
+                                <ButtonLtGray key={num} btnName={"btn-"+num} val={num} keyActive={keyActive} handleClick={handleClick} />
                             ))
                         }
                         
