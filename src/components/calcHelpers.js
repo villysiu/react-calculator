@@ -5,6 +5,7 @@ export const calc=(n1, op, n2)=>{
         return 'Error'
     if(op==='/' && (n2==='0' || n2==='-0'))
         return 'Error'
+        
     let numStr = ''
     if(op === '+' || op === '-')
         numStr = plusOrMinus(n1,n2,op) 

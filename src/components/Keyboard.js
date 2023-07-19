@@ -16,7 +16,6 @@ const Keyboard = () => {
     const [keyActive, setKeyActive] = useState(null)
 
     const handleClick = (input) =>{
-
         dispatch({type: input})
         setClickedOp(isOperator(input) ? input : null)
         console.log(state.inputArr)
@@ -24,15 +23,14 @@ const Keyboard = () => {
     
     const handleKeyPressed = (e) =>{
         console.log(e)
-        if(validateInput(e.key) || (e.keyCode === 189 && e.altKey)){
-            // console.log(e.key)
+        if(validateInput(e.key)){
             switch(true){
                 case e.key === 'Escape':
                     setKeyActive('btn-AC')
                     document.getElementById('btn-AC').click()
                     break;
                 
-                case e.key==="–" && e.altKey === true:
+                case e.key==="–": //negate
                     setKeyActive('btn-neg')
                     document.getElementById('btn-neg').click()
                     break;
@@ -47,7 +45,6 @@ const Keyboard = () => {
                     break;
 
                 default:
-                    console.log('in default')
                     setKeyActive(`btn-${e.key}`)
                     document.getElementById(`btn-${e.key}`).click()
                     break;
@@ -67,14 +64,13 @@ const Keyboard = () => {
 
     return(
         
-        <div className='background' style={{textAlign: 'center'}}>
-            <div>
+        <div className='calculator'>
+            <div className='display_input'>
                 <input 
-                autoFocus
-                type="text" className='display_input' value={state.output} 
-                onChange={handleChange} 
-                onKeyDown={handleKeyPressed}
-                // onKeyUp={handleKeyUp}
+                    autoFocus
+                    type="text" className='input_box' value={state.output} 
+                    onChange={handleChange} 
+                    onKeyDown={handleKeyPressed}
                  />
             </div>
             <div className='keys'>
@@ -98,7 +94,7 @@ const Keyboard = () => {
                 <div className='operators_pad'>
                     {
                         ['/','*','+','-','='].map(op=>(
-                            <ButtonOrange key={op} btnName={"btn-"+op} op={op} clickedOp={clickedOp} handleClick={handleClick} />
+                            <ButtonOrange key={op} btnName={"btn-"+op} op={op} keyActive={keyActive} clickedOp={clickedOp} handleClick={handleClick} />
                         ))
                     }
                 </div>

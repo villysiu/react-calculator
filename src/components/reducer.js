@@ -10,12 +10,10 @@ export const reducer = (state, action)=>{
     switch(action.type){
         case 'AC':
             return {...state, inputArr: ['0'], output: '0'}
-        // case state.inputArr[0] === 'Error':
-        //     return {...state, output: 'Error'}
 
         case 'Backspace':
         case 'Del':
-            return {...state, ...backSpaceHelper([...state.inputArr], state.output)}
+            return {...state, ...backSpaceHelper([...state.inputArr])}
             
         case '=':
         case 'Enter':
@@ -32,6 +30,7 @@ export const reducer = (state, action)=>{
         case '*':
         case '/':    
             return {...state, ...operatorHelper(action.type, [...state.inputArr])}
+            
         default:
             return {...state, ...digitHelper(action.type, [...state.inputArr], state.output) }
     }

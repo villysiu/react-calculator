@@ -20,19 +20,30 @@ code {
     --cal_w: 100vw;
   }
 }
+.bg {
+  background-color: rgb(230, 243, 255) !important;
+  /* width: 100vw; */
+
+}
 .App {
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.background {
+.calculator {
+  margin: auto;
   width: var(--cal_w);
   height: calc(var(--cal_w)*3/2);
   background-color: black;
+  position: relative;
 }
-
-.display_input{
+.shortcut {
+  text-align: center;
+  font-size: 13px;
+}
+/* .display_input{
+  
+  
+} */
+.input_box {
   text-align: right;
   color: white;
   font-size: 2rem;
@@ -41,8 +52,9 @@ code {
   height: calc(var(--cal_w)/4);
 }
 
-
 .keys {
+  position: absolute;
+  top:calc(var(--cal_w)/4);
   display: flex;
   width: 100%;
   height: calc(var(--cal_w)/4*5);
@@ -66,7 +78,6 @@ code {
 .key {
   color: black !important;
   font-weight: bolder !important;
-  /* padding: 0px !important; */
   width: calc(var(--cal_w)/4) !important;
   height: calc(var(--cal_w)/4) !important;
   border-color: rgba(109, 108, 126, 0.998) !important;
@@ -77,7 +88,6 @@ code {
 }
 .key_white{
   background-color: white !important;
-  /* color: black !important; */
 }
 
 .key_ltgray {
@@ -86,18 +96,27 @@ code {
 
 .key_double {
   width: calc(var(--cal_w)/2) !important;
-  /* background-color: lightgray !important; */
 }
 .key_dkgray {
   background-color: gray !important;
-  /* width: calc(var(--cal_w)/4) !important; */
 }
-/* .key_AC{
-  width: calc(var(--cal_w)/2) !important;
-  background-color: gray !important;
-} */
-/* .key_orange:active, .key_ltgray:active, .key_dkgray:active,  */
 .key_num_active, .key_ltgray:active, .key_dkgray:active, .key_orange:active {
   background-color: rgb(244, 228, 185, 0.8) !important;
 }
 
+.card-col{
+  padding: 12px;
+  display: flex;
+    justify-content: center;
+  
+}
+.card{
+ width: 500px !important;
+ padding: 12px
+}
+@media all and (max-width: 500px) {
+  .card{
+    padding: 12px;
+    width: calc(100vw - 24px) !important
+  }
+}

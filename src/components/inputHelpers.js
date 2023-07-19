@@ -1,14 +1,13 @@
 import { calc, isOperator, isMultiplyOrDivide, isPlusOrMinus, isFloat } from "./calcHelpers"
 
 export const validateInput = (key) =>{
-    const accepted = new Set(['AC','+','-','*','/','=','.','Del', 'neg','Enter','Backspace', 'Escape'])
+    const accepted = new Set(['AC','+','-','*','/','=','.','Del', 'neg','Enter','Backspace', 'Escape',"–"])
     for(let i=0;i<=9;i++)
         accepted.add(String(i))
     
     return accepted.has(key)
 }
-export const backSpaceHelper = (arr, mem) =>{
-    console.log(arr, mem)
+export const backSpaceHelper = (arr) =>{
     if(isOperator(arr[arr.length-1]) || arr[arr.length-1]==='='){
         // =+-*/ do nothing, maybe make a sound haha
         console.log('BEEP')
@@ -17,14 +16,14 @@ export const backSpaceHelper = (arr, mem) =>{
     // number
     let last=arr.pop()
     let updatedStr = last.slice(0,last.length-1)
-
     if(updatedStr.length===0 || last === '-0'){
         //last is single digit number or -0, removing -
-        return {inputArray: [...arr, '0'], output: '0'}
+        return {inputArr: [...arr, '0'], output: '0'}
     }
     if(updatedStr==='-'){
-        return {inputArray: [...arr, '-0'], output: '-0'}
+        return {inputArr: [...arr, '-0'], output: '-0'}
     }
+    
     //number string
     return {inputArr: [...arr, updatedStr], output: updatedStr}
 }
@@ -123,7 +122,6 @@ export const percentHelper = () =>{
 }
 export const digitHelper = (x, arr, calculatedNum) =>{
      // arr[arr.length-1] can be +-, */, 0, -0, number(integer or decimal,pos or neg), 
-    
     switch(arr[arr.length-1]){
         case "=":
             return {inputArr: [x], output:x}

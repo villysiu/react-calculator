@@ -1,5 +1,16 @@
 import Button from 'react-bootstrap/Button';
-export const ButtonOrange = ({btnName, op, clickedOp, handleClick}) => {
+export const ButtonOrange = ({btnName, op, keyActive, clickedOp, handleClick}) => {
+    if(btnName==='btn-='){
+        return (
+            <Button 
+            key={btnName}
+            id={btnName} 
+            className={keyActive===btnName ? "key key_num_active" : 'key key_orange'} 
+            onClick={e=>handleClick('=')}>
+                =
+            </Button>
+        )
+    }
     return(
         <Button 
             key={btnName}
