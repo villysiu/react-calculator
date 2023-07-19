@@ -5,12 +5,12 @@ import App from './App';
 import TechSpec from './components/TechSpec';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App />,
@@ -24,6 +24,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    {/* <App /> */}
   </React.StrictMode>
 );
 
