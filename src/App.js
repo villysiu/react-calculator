@@ -9,10 +9,10 @@ import Col from 'react-bootstrap/Col';
 function App() {
   return (
     <div className="App bg">
-        <Container>
-          <Row>
-            <Col sm={12} md={8}><Keyboard /></Col>
-            <Col sm={0} md={4}><ShortCut /></Col>
+        <Container className='p-0'>
+          <Row className='m-0'>
+            <Col sm={12} md={7} className='p-0' ><Keyboard /></Col>
+            <Col md={5} className='p-0'><ShortCut /></Col>
           </Row>
         </Container>
         <Footer />

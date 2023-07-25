@@ -16,7 +16,7 @@ export const ShortCut=()=>{
         
         <div className="shortcut">
   
-            <Table class="table" style={{textAlign: 'left'}}>
+            <Table className="shortcut_text" >
                 <thead>
                     <tr>
                         <th scope="col">Action</th>

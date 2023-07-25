@@ -3,7 +3,7 @@ export const Footer=()=>{
     return (
         <>
             <div>Created by <a href="mailto:villysiu@gmail.com">Villy Siu</a></div>
-            <div><Link to="tech-spec">About the Calculator</Link></div>
+            <div><Link to="tech-stack">Tech Stack</Link></div>
             <div>
             
                 

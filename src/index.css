@@ -13,11 +13,20 @@ code {
 }
 :root{
   --cal_w: 400px;
+  --cal_h: 600px;
+  
   
 }
 @media all and (max-width: 399px) {
   :root{
     --cal_w: 100vw;
+    --cal_h: calc(100vw/4*6);
+  }
+}
+@media all and (max-height: 599px) {
+  :root{
+    /* --cal_w: calc(100vh/6*4); */
+    --cal_h: 85vh;
   }
 }
 .bg {
@@ -28,58 +37,60 @@ code {
 .App {
   text-align: center;
 }
+
 .calculator {
   margin: auto;
   width: var(--cal_w);
-  height: calc(var(--cal_w)*3/2);
+  height: var(--cal_h);
   background-color: black;
   position: relative;
 }
-.shortcut {
+/* .shortcut {
   text-align: center;
   font-size: 13px;
-}
-/* .display_input{
-  
-  
 } */
+@media all and (max-width: 767px) {
+  .shortcut{
+    visibility: collapse;
+  }
+}
 .input_box {
   text-align: right;
   color: white;
   font-size: 2rem;
   background-color: black;
   width: var(--cal_w);
-  height: calc(var(--cal_w)/4);
+  height: calc(var(--cal_h)/6);
 }
 
 .keys {
-  position: absolute;
+  /* position: absolute; */
   top:calc(var(--cal_w)/4);
   display: flex;
   width: 100%;
-  height: calc(var(--cal_w)/4*5);
+  height: calc(var(--cal-h)/6*5);
 }
 .keys_pad {
   width: 75%;
-  height: calc(var(--cal_w)/4*5);
+  height: calc(var(--cal_h)/6*5);
 }
 .operators_pad {
   width: 25%;
-  height: calc(var(--cal_w)/4*5);
+  height: calc(var(--cal_h)/6*5);
 }
 .misc_pad {
   width: 100%;
-  height: calc(var(--cal_w)/4);
+  height: calc(var(--cal_h)/6);
 }
 .number_pad {
   width: 100%;
-  height: var(--cal_w);
+  height: calc(var(--cal_h)/6*4);
 }
 .key {
   color: black !important;
   font-weight: bolder !important;
   width: calc(var(--cal_w)/4) !important;
-  height: calc(var(--cal_w)/4) !important;
+  height: calc(var(--cal_h)/6) !important;
   border-color: rgba(109, 108, 126, 0.998) !important;
   
 }
@@ -107,16 +118,20 @@ code {
 .card-col{
   padding: 12px;
   display: flex;
-    justify-content: center;
+  justify-content: center;
   
 }
 .card{
- width: 500px !important;
+ width: 600px !important;
  padding: 12px
 }
-@media all and (max-width: 500px) {
+@media all and (max-width: 600px) {
   .card{
     padding: 12px;
     width: calc(100vw - 24px) !important
   }
+}
+.shortcut_text {
+  text-align: left;
+    font-size: calc(var(--cal_h)/35)
 }

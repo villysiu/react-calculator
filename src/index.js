@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import TechSpec from './components/TechSpec';
+import TechStack from './components/TechStack';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createHashRouter,
@@ -16,8 +16,8 @@ const router = createHashRouter([
     element: <App />,
   },
   {
-    path: "/tech-spec",
-    element: <TechSpec />
+    path: "/tech-stack",
+    element: <TechStack />
   }
 ]);
 
